@@ -4,7 +4,7 @@ import { faSearch, faSpinner } from "@fortawesome/free-solid-svg-icons"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { Input } from "antd"
 
-type SearchBarProps = {
+export type SearchBarProps = {
   setStatus: React.Dispatch<React.SetStateAction<string>>;
   setSearchParms: React.Dispatch<React.SetStateAction<string>>;
   setData: React.Dispatch<React.SetStateAction<any>>;
