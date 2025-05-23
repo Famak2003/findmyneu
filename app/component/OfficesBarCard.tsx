@@ -1,6 +1,7 @@
-import { faBuilding, faBuildingColumns } from "@fortawesome/free-solid-svg-icons"
+import { faBriefcase, faBuilding, faBuildingColumns, faUserGear } from "@fortawesome/free-solid-svg-icons"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { OfficesType } from "./Location";
+import { Tooltip } from "antd";
 
 interface OfficesBarCardType {
     obj: OfficesType
@@ -10,6 +11,16 @@ interface OfficesBarCardType {
 }
 
 const OfficesBarCard = ({obj, setIsModalVisible, setLocationData, idx}: OfficesBarCardType) => {
+
+    const OfficeBarCardIcon = (type: string) => {
+        switch (type) {            
+            case "office":
+                return <FontAwesomeIcon className=" cardIcon  " icon={faBriefcase} />
+            default:
+                return <FontAwesomeIcon className=" cardIcon  " icon={faUserGear} />
+        }
+    }
+
     return(
         <div 
             onClick={() => {
@@ -19,21 +30,17 @@ const OfficesBarCard = ({obj, setIsModalVisible, setLocationData, idx}: OfficesB
             key={idx} 
             className="group barCard">
             <figure>
-                <FontAwesomeIcon className="cardIcon" icon={faBuilding} />
+                <Tooltip title={obj?.type} placement="top" color="#000000" >
+                    {
+                        OfficeBarCardIcon(obj?.type)
+                    }
+                </Tooltip>
             </figure>
             <div key={idx} className=" flex flex-col gap-1 text-black " >
 
                 <div className=" flex ">
                     <p>{obj?.name} </p> 
                 </div>
-
-                {/* <div className=" flex gap-2 ">
-                    <h1 className=" font-semibold ">Branch</h1> : <p>{obj?.name} </p> 
-                </div>
-
-                <div className=" flex gap-2 ">
-                    <h1 className=" font-semibold ">Location</h1> : <p>{obj?.Branch?.city} / {obj?.Branch?.country} </p> 
-                </div> */}
             </div>
         </div>
     )

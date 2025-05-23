@@ -18,14 +18,12 @@ const CustomModal: React.FC<CustomModalProps> = ({ isModalVisible, setIsModalVis
             // title={ <h1 className=" uppercase font-bold text-[20px] "><I18N>{title}</I18N></h1> }
             title={ <h1 className=" uppercase font-bold text-[20px] ">{title}</h1> }
             open={isModalVisible}
-            width={"500px"}            
-            className='  '
+            className=' !w-[90%] sm:!w-[500px] '           
+            cancelButtonProps={{ style: { display: 'none' } }}
+            okButtonProps={{ style: { backgroundColor: 'black', color: "white" } }}
             okText={"close"}
             onCancel={() => setIsModalVisible(false)}
-            // onOk={() => setIsModalVisible(false)}
-            // // confirmLoading={loading}
-            // onCancel={() => setIsModalVisible(false)}
-            // onClose={() => setIsModalVisible(false)}
+            onOk={() => setIsModalVisible(false)}
         >
             <div className=" flex flex-col gap-6 min-h-[150px] ">
                 {children}

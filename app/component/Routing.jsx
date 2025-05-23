@@ -22,7 +22,6 @@ L.Marker.prototype.options.icon = L.icon({
 // };
 
 export default function Routing({ userLocation, destination }) {
-  console.log(userLocation, destination);
   const map = useMap();
 
   useEffect(() => {

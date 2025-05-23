@@ -37,12 +37,10 @@ const Location = ({data}: LocationProps) => {
             <LocationsModal isModalVisible={isLocationModalVisible} setIsModalVisible={setIsLocationModalVisible} data={locationData}  />
             {
                  data.map((obj: any, idx: number) => {
-                        if (obj?.type === "office") {
-                            return <OfficesBarCard setLocationData={setLocationData} setIsModalVisible={setIsLocationModalVisible} obj={obj} idx={idx} />;
-                        } else if (obj?.type === "branch") {
+                        if (obj?.type === "branch") {
                             return <BranchesBarCard setLocationData={setLocationData} setIsModalVisible={setIsLocationModalVisible} obj={obj} idx={idx} />;
                         } else {
-                            return null;
+                            return <OfficesBarCard setLocationData={setLocationData} setIsModalVisible={setIsLocationModalVisible} obj={obj} idx={idx} />;
                         }
                 })
             }

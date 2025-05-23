@@ -1,6 +1,7 @@
 import { faBuildingColumns } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { BranchesType } from "./Location";
+import { Tooltip } from "antd";
 
 interface BranchesBarCardProps {
     obj: BranchesType
@@ -32,7 +33,11 @@ const BranchesBarCard = ({idx, setIsModalVisible, setLocationData, obj}: Branche
             className=" group barCard "
         >
             <figure className="  " >
-                <FontAwesomeIcon className="cardIcon" icon={faBuildingColumns} />
+                <Tooltip title={obj?.type} placement="top" color="#000000" >
+                    {
+                        <FontAwesomeIcon className="cardIcon" icon={faBuildingColumns} />
+                    }
+                </Tooltip>
             </figure>
             <div className=" flex flex-col gap-1 text-black ">
                 <div className=" flex ">

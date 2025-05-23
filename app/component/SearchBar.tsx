@@ -4,6 +4,7 @@ import { faSearch, faSpinner } from "@fortawesome/free-solid-svg-icons"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { Input } from "antd"
 import { useEffect, useRef } from "react"
+import toast from "react-hot-toast"
 
 export type SearchBarProps = {
   setStatus: React.Dispatch<React.SetStateAction<string>>;
@@ -17,15 +18,6 @@ export type SearchBarProps = {
 const SearchBar = ({setStatus, setSearchParms, searchParms, setData, status}: SearchBarProps) => {
     const abortControllerRef = useRef<AbortController | null>(null);
     const fetchData = async (searchParams: string) => {
-        // Check if the searchParams is empty
-        // if (!searchParms) {
-        //     console.log("searchParms is empty", status);
-        //     // abortControllerRef?.current?.abort
-        //     setStatus("idle");
-        //     setData({});
-        //     return;
-        // }
-
         // About Previous Request
         if (abortControllerRef.current){
             abortControllerRef.current.abort
@@ -34,29 +26,30 @@ const SearchBar = ({setStatus, setSearchParms, searchParms, setData, status}: Se
         //Creat new AbortController for new request
         const controller = new AbortController();
         abortControllerRef.current = controller;
+        if (!searchParams) {
+            setStatus("idle");
+            setData({});
+            return;
+        }
         try {
             const res = await api.get(`employee/find-my-neu/autocomplete/${searchParams}`,{
                 signal: controller.signal
             })
             const data = res.data.data
-            // console.log(data)
-            if(searchParams !== "") {
-                setStatus("result");
-                setData({
-                    personel: data?.personel,
-                    location: [
-                        ...data?.offices,
-                        ...data?.branches
-                    ]
-                })
-            }else {
-                setStatus("idle");
-                setData({});
-            }
-    
+            console.log("Fetched")
+            setStatus("result");
+            setData({
+                personel: data?.personel,
+                location: [
+                    ...data?.offices,
+                    ...data?.branches
+                ]
+            })
+            return
     
         } catch (error) {
             setStatus("idle");
+            toast.error("Something went wrong, please try again later")
             console.error("Error fetching data:", error);
         }
     }
@@ -67,43 +60,16 @@ const SearchBar = ({setStatus, setSearchParms, searchParms, setData, status}: Se
         setSearchParms(searchParms);
         setStatus("loading");
         if (!searchParms) {
-            console.log("searchParms is empty");
             abortControllerRef?.current?.abort
             setStatus("idle");
             setData({});
             return;
-        }
-
-        // debouncedFetchDataRef.current(searchParms);
-
-        // try {
-        //     const res = await api.get(`employee/find-my-neu/autocomplete/${searchParams}`)
-        //     setStatus("result");
-        //     const data = res.data.data
-        //     console.log(data)
-        //     setData({
-        //         personel: data?.personel,
-        //         location: [
-        //             ...data?.offices,
-        //             ...data?.branches
-        //         ]
-        //     })
-        
-        
-        // } catch (error) {
-        //     setStatus("idle");
-        //     console.error("Error fetching data:", error);
-        // }
-        
+        }         
     };
 
     useEffect(() => {
-        if (searchParms) {
-            debouncedFetchDataRef.current(searchParms);
-        }
+        debouncedFetchDataRef.current(searchParms);
     }, [searchParms]);
-
-    // const debouncedSearch = debounce(handleSearch, 500)
 
     return (
         <div className=" flex items-center gap-2 pl-3 w-full overflow-hidden">

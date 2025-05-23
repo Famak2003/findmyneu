@@ -1,8 +1,10 @@
-import { Modal } from "antd"
 import CustomModal, { CustomModalProps } from "./reuseable/CustomModal"
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faBuildingColumns, faUser } from "@fortawesome/free-solid-svg-icons";
+import { faBriefcase, faBuilding, faBuildingColumns, faChair, faChartArea, faUser, faUserGear } from "@fortawesome/free-solid-svg-icons";
+import api from "@/lib/axios";
+import toast from "react-hot-toast";
+import SkeletonModal from "./reuseable/SkeletonModal";
 
 interface LocationsModalProps{
     data: any,
@@ -10,23 +12,95 @@ interface LocationsModalProps{
     setIsModalVisible: (visible: boolean) => void;
 }
 
+type openMapType = {
+    lat: number;
+    lon: number;
+}
+
 const LocationsModal: React.FC<LocationsModalProps> = ({ isModalVisible, setIsModalVisible, data}) => {
-    
+    const [fetchedData, setFetchedData] = useState<any>({});
+    const [status, setStatus] = useState("idle");
+
+    const handleOpenMap = ({lon, lat}: openMapType) => {
+        const url = `https://www.google.com/maps?q=${lat},${lon}`
+        window.open(url, "_blank")
+    }
+
+    const LocationIcon = (type: string) => {
+        switch (type) {
+            case "branch":
+                return <FontAwesomeIcon className=" !w-full !h-full  " icon={faBuildingColumns} />
+            case "office":
+                return <FontAwesomeIcon className=" !w-full !h-full  " icon={faBriefcase} />
+            default:
+                return <FontAwesomeIcon className=" !w-full !h-full  " icon={faUserGear} />
+        }
+    }
+
+    useEffect(() => {
+        const FetchModalData = async () => {
+            try {
+                setStatus("loading");
+                const res = await api.get(`employee/find-my-neu/${data?.type}/${data?.id}`)
+                const fetchedData = res.data.data
+                
+                setStatus("idle");
+                setFetchedData(fetchedData);
+        
+            } catch (error) {
+                setStatus("idle");
+                toast.error("Oops, something went wrong please try again later")
+                console.error("Error fetching data:", error);
+            }
+        }
+        FetchModalData()
+        
+    }, [data])
+
+
     return (
-        <CustomModal isModalVisible={isModalVisible} setIsModalVisible={setIsModalVisible} title="Personel Modal">
-            <div className=" flex flex-col gap-4 ">
-                <figure className=" w-full h-[400px] ">
-                    <FontAwesomeIcon className=" !w-full !h-full  " icon={faBuildingColumns} />
-                </figure>
-                <div className=" flex flex-col gap-1 w-full text-black ">
-                    <div className=" flex gap-2 ">
-                        <h1 className=" font-semibold ">Name</h1> : <p>{data?.name} </p> 
+        <CustomModal isModalVisible={isModalVisible} setIsModalVisible={setIsModalVisible} title={data?.type}>
+            {
+                status === "loading" ? (
+                    <SkeletonModal/>
+                ) : (
+                    <div className=" flex flex-col gap-4 ">
+                        <figure className=" w-full h-[400px] ">
+                            {LocationIcon(data?.type)}
+                        </figure>
+                        <div className=" flex flex-col gap-1 w-full text-black ">
+                            {
+                                data?.type === "branch" ? (
+                                    <>
+                                        <div className=" flex gap-2 ">
+                                            <h1 className=" font-semibold ">Name</h1> : <p>{fetchedData?.name} </p> 
+                                        </div>
+                                        <div className=" flex gap-2 ">
+                                            <h1 className=" font-semibold ">Location</h1> : <p>{fetchedData?.country || "..."} </p> /  <p>{fetchedData?.city || "..."} </p> 
+                                        </div>
+                                        <button className=" self-start cursor-pointer text-gray-500 underline hover:text-black duration-300 transition-all ease-in-out " onClick={() => handleOpenMap({lon: fetchedData?.lon, lat: fetchedData?.lat})} >Map View</button>
+                                    </>
+                                ) : (
+                                    <>
+                                        <div className=" flex gap-2 ">
+                                            <h1 className=" font-semibold ">Name</h1> : <p>{fetchedData?.name} </p> 
+                                        </div>
+                                        <div className=" flex gap-2 ">
+                                            <h1 className=" font-semibold ">Branch Location</h1> : <p>{fetchedData?.Branch?.country || "..."} </p> /  <p>{fetchedData?.Branch?.city || "..."} </p> 
+                                        </div>
+                                        <div className=" flex gap-2 ">
+                                            <h1 className=" font-semibold ">Branch Name</h1> : <p>{fetchedData?.Branch?.name} </p> 
+                                        </div>
+                                        {/* <button className=" self-start cursor-pointer text-gray-500 hover:text-black duration-300 transition-all ease-in-out " onClick={() => handleOpenMap({lon: fetchedData?.lon, lat: fetchedData?.lat})} >Branch <span className="underline ">Map View</span> </button> */}
+
+                                    </>
+                                )
+                            }
+                            
+                        </div>
                     </div>
-                    <div className=" flex gap-2 ">
-                        <h1 className=" font-semibold ">Location</h1> : <p>{data?.country || "..."} </p> /  <p>{data?.city || "..."} </p> 
-                    </div>
-                </div>
-            </div>
+                )
+            }
         </CustomModal>
     )
 }
