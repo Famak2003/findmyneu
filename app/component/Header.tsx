@@ -1,7 +1,4 @@
-import Image from "next/image";
-import SearchBar, { SearchBarProps } from "./SearchBar";
-
-const Header = ({status, setData, setStatus, setSearchParms}: SearchBarProps) => {
+const Header = () => {
     return (
         <div className=" flex flex-col gap-8 w-full ">
             <header className=" flex flex-col gap-4 justify-center items-center " >
@@ -10,7 +7,7 @@ const Header = ({status, setData, setStatus, setSearchParms}: SearchBarProps) =>
                 </figure>
                 <h1 className="text-4xl font-semibold text-center text-black">Find my NEU</h1>
             </header>
-            <SearchBar status={status} setData={setData} setStatus={setStatus} setSearchParms={setSearchParms} />
+            {/* <SearchBar status={status} setData={setData} setStatus={setStatus} setSearchParms={setSearchParms} /> */}
         </div>
     );
 }
