@@ -41,16 +41,17 @@ const LocationsModal: React.FC<LocationsModalProps> = ({ isModalVisible, setIsMo
         const FetchModalData = async () => {
             try {
                 setStatus("loading");
-                const res = await api.get(`employee/find-my-neu/${data?.type}/${data?.id}`)
+                const res = await api.get(`employee/find-my-neu/${data?.type ? data?.type : "office"}/${data?.id}`)
                 const fetchedData = res.data.data
                 
                 setStatus("idle");
                 setFetchedData(fetchedData);
-        
+
             } catch (error) {
                 setStatus("idle");
                 toast.error("Oops, something went wrong please try again later")
-                console.error("Error fetching data:", error);
+                // console.error("Error fetching data:", error);
+                console.error("Error fetching data:");
             }
         }
         FetchModalData()
@@ -59,13 +60,13 @@ const LocationsModal: React.FC<LocationsModalProps> = ({ isModalVisible, setIsMo
 
 
     return (
-        <CustomModal isModalVisible={isModalVisible} setIsModalVisible={setIsModalVisible} title={data?.type}>
+        <CustomModal isModalVisible={isModalVisible} setIsModalVisible={setIsModalVisible} title={data?.type ? data?.type : "office"}>
             {
                 status === "loading" ? (
                     <SkeletonModal/>
                 ) : (
-                    <div className=" flex flex-col gap-4 ">
-                        <figure className=" w-full h-[400px] ">
+                    <div className=" skeletonModal ">
+                        <figure className=" skeletonModalImageContainer ">
                             {LocationIcon(data?.type)}
                         </figure>
                         <div className=" flex flex-col gap-1 w-full text-black ">

@@ -36,7 +36,6 @@ const SearchBar = ({setStatus, setSearchParms, searchParms, setData, status}: Se
                 signal: controller.signal
             })
             const data = res.data.data
-            console.log("Fetched")
             setStatus("result");
             setData({
                 personel: data?.personel,
@@ -50,7 +49,8 @@ const SearchBar = ({setStatus, setSearchParms, searchParms, setData, status}: Se
         } catch (error) {
             setStatus("idle");
             toast.error("Something went wrong, please try again later")
-            console.error("Error fetching data:", error);
+            // console.error("Error fetching data:", error);
+            console.error("Error fetching data:");
         }
     }
     const debouncedFetchDataRef = useRef(debounce(fetchData, 200));

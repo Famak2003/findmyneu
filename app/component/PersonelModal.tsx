@@ -30,7 +30,8 @@ const PersonelModal: React.FC<PersonelModalProps> = ({ isModalVisible, setIsModa
             } catch (error) {
                 setStatus("idle");
                 toast.error("Oops, something went wrong please try again later")
-                console.error("Error fetching data:", error);
+                // console.error("Error fetching data:", error);
+                console.error("Error fetching data:");
             }
         }
         FetchModalData()
@@ -60,17 +61,17 @@ const PersonelModal: React.FC<PersonelModalProps> = ({ isModalVisible, setIsModa
                                     <h1 className=" font-semibold ">Name</h1> : <p>{fetchedData?.name} {fetchedData?.surname} </p> 
                                 </div>
                                 <div className=" flex gap-2 ">
-                                    <h1 className=" font-semibold ">Email</h1> : <p>{fetchedData?.EmployeeOfficial?.companyEmail || "..."} </p> 
+                                    <h1 className=" font-semibold  ">Email</h1> : <p className="overflow-x-clip w-[70%] sm:w-full">{fetchedData?.EmployeeOfficial?.companyEmail || "..."} </p> 
                                 </div>
                                 <div className=" flex gap-2 ">
                                     <h1 className=" font-semibold ">Position</h1> : <p>{fetchedData?.EmployeeOfficial?.Position?.name_en || "..."} </p> 
                                 </div>
                                 <div className=" flex gap-2 ">
-                                    <h1 className=" font-semibold ">Office Location</h1> : <p> {fetchedData?.EmployeeOfficial?.Branch?.name || "..."} {">"} {fetchedData?.EmployeeOfficial?.Office?.name || "..."} </p>
+                                    <h1 className=" font-semibold ">Office</h1> : <p> {fetchedData?.EmployeeOfficial?.Branch?.name || "..."} {">"} {fetchedData?.EmployeeOfficial?.Office?.name || "..."} </p>
                                 </div>
-                                <div className=" flex gap-2 ">
+                                {/* <div className=" flex gap-2 ">
                                     <h1 className=" font-semibold ">Seat Number</h1> : <p> {fetchedData?.EmployeeOfficial?.Seat?.name || "..."} </p>
-                                </div>
+                                </div> */}
                             </div>
                         </div>
 

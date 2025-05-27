@@ -26,13 +26,9 @@ export default function Home() {
     const [isPersonelModalVisible, setIsPersonelModalVisible] = useState(false);
     const [personelData, setPersonelData] = useState({});
 
-    // console.log(personelData)
-    console.log(data)
-    console.log(status)
-
     return (
         <div className=" flex flex-col items-center justify-between gap-[30px] w-full min-h-[100dvh] bg-gray-200 ">
-            <main className=" flex flex-col items-center sm:pt-[80px] px-[20px] py-5 gap-8 w-full max-w-[800px] h-fit 0 " >
+            <main className=" flex flex-col items-center sm:mt-[20dvh] px-[20px] py-5 gap-[5dvh] w-full max-w-[800px] h-fit 0 " >
                 <Header/>
                 <div className=" flex flex-col max-w-[800px] w-full rounded-2xl py-2 bg-white h-fit duration-300 transition-all  " >
                     <SearchBar status={status} setData={setData} setStatus={setStatus} setSearchParms={setSearchParms} searchParms={searchParms} />
@@ -69,42 +65,44 @@ export default function Home() {
                                 </div>
                             </div>
                         ) : status === "idle" ? (
-                            <ul className=" flex gap-2 items-center px-5 py-3 " >                                
-                                <li
-                                    className=" px-3 py-1 rounded-2xl bg-gray-700 bg-opacity-50 hover:bg-opacity-70 hover:shadow-2xl text-[12px] cursor-pointer transition-all duration-300 "
-                                    onClick={() => {
-                                        setSearchParms("Prof")
-                                    }}
-                                >
-                                    Prof
-                                </li>
-                                <li
-                                    className=" px-3 py-1 rounded-2xl bg-gray-700 bg-opacity-50 hover:bg-opacity-70 hover:shadow-2xl text-[12px] cursor-pointer transition-all duration-300 "
-                                    onClick={() => {
-                                        setSearchParms("Dr")
-                                    }}
-                                >
-                                    Dr
-                                </li>
-                                <li
-                                    className=" px-3 py-1 rounded-2xl bg-gray-700 bg-opacity-50 hover:bg-opacity-70 hover:shadow-2xl text-[12px] cursor-pointer transition-all duration-300 "
-                                    onClick={() => {
-                                        setSearchParms("Mr")
-                                    }}
-                                >
-                                    Mr
-                                </li>
-                                <li
-                                    className=" px-3 py-1 rounded-2xl bg-gray-700 bg-opacity-50 hover:bg-opacity-70 hover:shadow-2xl text-[12px] cursor-pointer transition-all duration-300 "
-                                    onClick={() => {
-                                        setSearchParms("Mrs")
-                                    }}
-                                >
-                                    Mrs
-                                </li>
-                            </ul>
+                            // <ul className=" flex gap-2 items-center px-5 py-3 " >                                
+                            //     <li
+                            //         className=" px-3 py-1 rounded-2xl bg-gray-700 bg-opacity-50 hover:bg-opacity-70 hover:shadow-2xl text-[12px] cursor-pointer transition-all duration-300 "
+                            //         onClick={() => {
+                            //             setSearchParms("Prof")
+                            //         }}
+                            //     >
+                            //         Prof
+                            //     </li>
+                            //     <li
+                            //         className=" px-3 py-1 rounded-2xl bg-gray-700 bg-opacity-50 hover:bg-opacity-70 hover:shadow-2xl text-[12px] cursor-pointer transition-all duration-300 "
+                            //         onClick={() => {
+                            //             setSearchParms("Dr")
+                            //         }}
+                            //     >
+                            //         Dr
+                            //     </li>
+                            //     <li
+                            //         className=" px-3 py-1 rounded-2xl bg-gray-700 bg-opacity-50 hover:bg-opacity-70 hover:shadow-2xl text-[12px] cursor-pointer transition-all duration-300 "
+                            //         onClick={() => {
+                            //             setSearchParms("Mr")
+                            //         }}
+                            //     >
+                            //         Mr
+                            //     </li>
+                            //     <li
+                            //         className=" px-3 py-1 rounded-2xl bg-gray-700 bg-opacity-50 hover:bg-opacity-70 hover:shadow-2xl text-[12px] cursor-pointer transition-all duration-300 "
+                            //         onClick={() => {
+                            //             setSearchParms("Mrs")
+                            //         }}
+                            //     >
+                            //         Mrs
+                            //     </li>
+                            // </ul>
+                            <>
+                            </>
                         ) : (
-                            <div className=" w-full flex flex-col gap-4 p-4 overflow-y-scroll max-h-[520px] DisableScrollBar " >
+                            <div className=" w-full flex flex-col gap-4 p-4 overflow-y-scroll max-h-[498px] DisableScrollBar " >
                                 <PersonelModal isModalVisible={isPersonelModalVisible} data={personelData} setIsModalVisible={setIsPersonelModalVisible}/>
                                 {
                                     data?.personel.length || data?.location.length ? (
