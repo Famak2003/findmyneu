@@ -18,7 +18,7 @@ const poppins = Poppins({
 });
 
 export const metadata: Metadata = {
-  title: "Find My Professor",
+  title: "Find My NEU",
   description: "An application built to help navigate NEU.",
 };
 
