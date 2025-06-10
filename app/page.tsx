@@ -28,7 +28,7 @@ export default function Home() {
 
     return (
         <div className=" flex flex-col items-center justify-between gap-[30px] w-full min-h-[100dvh] bg-gray-200 ">
-            <main className=" flex flex-col items-center sm:mt-[20dvh] px-[20px] py-5 gap-[5dvh] w-full max-w-[800px] h-fit 0 " >
+            <main className=" flex flex-col items-center sm:mt-[10dvh] px-[20px] py-5 gap-[5dvh] w-full max-w-[800px] h-fit 0 " >
                 <Header/>
                 <div className=" flex flex-col max-w-[800px] w-full rounded-2xl py-2 bg-white h-fit duration-300 transition-all  " >
                     <SearchBar status={status} setData={setData} setStatus={setStatus} setSearchParms={setSearchParms} searchParms={searchParms} />
@@ -131,7 +131,7 @@ export default function Home() {
                                                                                     item === "personel" ? (
                                                                                         data[item]?.map((obj: any, idx: number) => {
                                                                                             return (
-                                                                                                <PersonelBarCard idx={idx} setPersonelData={setPersonelData} setIsModalVisible={setIsPersonelModalVisible} data={obj} />
+                                                                                                <PersonelBarCard key={idx} idx={idx} setPersonelData={setPersonelData} setIsModalVisible={setIsPersonelModalVisible} data={obj} />
                                                                                             )
                                                                                         })
                                                                                     ) : (

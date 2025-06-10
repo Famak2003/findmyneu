@@ -9,7 +9,10 @@ module.exports = {
     extend: {
       screens: {
         mobile: "450px"
-      }
+      },
+      colors: {
+        "light-silvergray": "#D4D4D4",
+      },
     },
   },
   plugins: [],

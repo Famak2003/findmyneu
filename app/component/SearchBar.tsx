@@ -76,7 +76,8 @@ const SearchBar = ({setStatus, setSearchParms, searchParms, setData, status}: Se
             <Input
                 value={searchParms}
                 onChange={handleSearch}
-                className=" !ring-0 !border-0 !w-[85%] sm:!w-[93%] !min-h-[40px] " placeholder=" Search by your prof name... " 
+                className=" !ring-0 !border-0 !w-[85%] sm:!w-[93%] !min-h-[40px] " 
+                placeholder=" Search academicians or locations... " 
             />
             <button className={` flex justify-center items-center w-[15%] sm:w-[7%] h-full duration-300 transition-all hover:scale-110 cursor-pointer ${status === "loading" && "animate-spin"} `} >
                 {
