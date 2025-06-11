@@ -74,7 +74,7 @@ const LocationsModal: React.FC<LocationsModalProps> = ({ isModalVisible, setIsMo
                                 data?.type === "branch" ? (
                                     <>
                                         <div className=" flex gap-2 ">
-                                            <h1 className=" font-semibold capitalize ">Name</h1> : <p>{fetchedData?.name} </p> 
+                                            <h1 className=" font-semibold capitalize ">Name</h1> : <p className=" capitalize ">{fetchedData?.name} </p> 
                                         </div>
                                         <div className=" flex gap-2 ">
                                             <h1 className=" font-semibold ">Location</h1> : <p className=" capitalize ">{fetchedData?.country || "..."} </p> /  <p className="capitalize" >{fetchedData?.city || "..."} </p> 
@@ -84,10 +84,10 @@ const LocationsModal: React.FC<LocationsModalProps> = ({ isModalVisible, setIsMo
                                 ) : (
                                     <>
                                         <div className=" flex gap-2 ">
-                                            <h1 className=" font-semibold ">Name</h1> : <p>{fetchedData?.name} </p> 
+                                            <h1 className=" font-semibold ">Name</h1> : <p className="capitalize">{fetchedData?.name} </p> 
                                         </div>
                                         <div className=" flex gap-2 ">
-                                            <h1 className=" font-semibold ">Branch Location</h1> : <p>{fetchedData?.Branch?.country || "..."} </p> /  <p>{fetchedData?.Branch?.city || "..."} </p> 
+                                            <h1 className=" font-semibold ">Branch Location</h1> : <p className="capitalize">{fetchedData?.Branch?.country || "..."} </p> /  <p className="capitalize">{fetchedData?.Branch?.city || "..."} </p> 
                                         </div>
                                         <div className=" flex gap-2 ">
                                             <h1 className=" font-semibold ">Branch Name</h1> : <p>{fetchedData?.Branch?.name} </p> 
