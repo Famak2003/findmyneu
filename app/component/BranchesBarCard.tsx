@@ -17,7 +17,6 @@ type openMapType = {
 
 
 const BranchesBarCard = ({idx, setIsModalVisible, setLocationData, obj}: BranchesBarCardProps) => {
-    console.log("BranchesBarCard", obj);
     const handleOpenMap = ({lon, lat}: openMapType) => {
         const url = `https://www.google.com/maps?q=${lat},${lon}`
         window.open(url, "_blank")

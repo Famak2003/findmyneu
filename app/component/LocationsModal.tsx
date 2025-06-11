@@ -58,9 +58,8 @@ const LocationsModal: React.FC<LocationsModalProps> = ({ isModalVisible, setIsMo
         
     }, [data])
 
-
     return (
-        <CustomModal isModalVisible={isModalVisible} setIsModalVisible={setIsModalVisible} title={data?.type ? data?.type : "office"}>
+        <CustomModal isModalVisible={isModalVisible} setIsModalVisible={setIsModalVisible} title={data?.type ? data?.type : "INFO"}>
             {
                 status === "loading" ? (
                     <SkeletonModal/>
