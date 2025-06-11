@@ -17,7 +17,7 @@ type openMapType = {
 
 
 const BranchesBarCard = ({idx, setIsModalVisible, setLocationData, obj}: BranchesBarCardProps) => {
-
+    console.log("BranchesBarCard", obj);
     const handleOpenMap = ({lon, lat}: openMapType) => {
         const url = `https://www.google.com/maps?q=${lat},${lon}`
         window.open(url, "_blank")
@@ -41,7 +41,7 @@ const BranchesBarCard = ({idx, setIsModalVisible, setLocationData, obj}: Branche
             </figure>
             <div className=" flex flex-col gap-1 text-black ">
                 <div className=" flex ">
-                    <p>{obj?.country} / {obj?.country} </p> 
+                    <p className="capitalize">{obj?.country} / {obj?.city} </p> 
                 </div>
                 {/* <button className=" self-start cursor-pointer text-gray-500 underline hover:text-black duration-300 transition-all ease-in-out " onClick={() => handleOpenMap({lon: obj?.lon, lat: obj?.lat})} >Map View</button> */}
                 {/* <MapView destination={{lat: obj?.lat, lon: obj?.lon}} userLocation={{lat: location?.lat, lon: location?.lon}} /> */}

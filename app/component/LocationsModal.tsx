@@ -74,10 +74,10 @@ const LocationsModal: React.FC<LocationsModalProps> = ({ isModalVisible, setIsMo
                                 data?.type === "branch" ? (
                                     <>
                                         <div className=" flex gap-2 ">
-                                            <h1 className=" font-semibold ">Name</h1> : <p>{fetchedData?.name} </p> 
+                                            <h1 className=" font-semibold capitalize ">Name</h1> : <p>{fetchedData?.name} </p> 
                                         </div>
                                         <div className=" flex gap-2 ">
-                                            <h1 className=" font-semibold ">Location</h1> : <p>{fetchedData?.country || "..."} </p> /  <p>{fetchedData?.city || "..."} </p> 
+                                            <h1 className=" font-semibold ">Location</h1> : <p className=" capitalize ">{fetchedData?.country || "..."} </p> /  <p className="capitalize" >{fetchedData?.city || "..."} </p> 
                                         </div>
                                         <button className=" self-start cursor-pointer text-gray-500 underline hover:text-black duration-300 transition-all ease-in-out " onClick={() => handleOpenMap({lon: fetchedData?.lon, lat: fetchedData?.lat})} >Map View</button>
                                     </>
